@@ -35,11 +35,6 @@ def get_posts_by_hashtag(tag, number, debug):
     return ins_crawler.get_latest_posts_by_tag(tag, number)
 
 
-def arg_required(args, fields=[]):
-    for field in fields:
-        if not getattr(args, field):
-            parser.print_help()
-            sys.exit()
 
 
 def output(data, filepath):
@@ -52,37 +47,4 @@ def output(data, filepath):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Instagram Crawler',
-                                     usage=usage())
-    parser.add_argument('mode',
-                        help='options: [posts, posts_full, profile, hashtag]')
-    parser.add_argument('-n', '--number',
-                        type=int,
-                        help='number of returned posts')
-    parser.add_argument('-u', '--username',
-                        help='instagram\'s username')
-    parser.add_argument('-t', '--tag',
-                        help='instagram\'s tag name')
-    parser.add_argument('-o', '--output', help='output file name(json format)')
-    parser.add_argument('--debug', action='store_true')
-    args = parser.parse_args()
-
-    if args.mode in ['posts', 'posts_full']:
-        arg_required('username')
-        output(
-            get_posts_by_user(
-                args.username,
-                args.number,
-                args.mode == 'posts_full',
-                args.debug
-            ),
-            args.output)
-    elif args.mode == 'profile':
-        arg_required('username')
-        output(get_profile(args.username), args.output)
-    elif args.mode == 'hashtag':
-        arg_required('tag')
-        output(
-            get_posts_by_hashtag(args.tag, args.number or 100, args.debug), args.output)
-    else:
-        usage()
+    get_posts_by_hashtag("love", None or 100, False), "./output"
