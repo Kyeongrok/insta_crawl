@@ -302,6 +302,7 @@ class InsCrawler(Logging):
         pbar = tqdm(total=num)
 
         def start_fetching(pre_post_num, wait_time):
+            # 여기에서 browser를 크롤 할 수 있다.
             ele_posts = browser.find('.v1Nh3 a')
             for ele in ele_posts:
                 key = ele.get_attribute('href')
