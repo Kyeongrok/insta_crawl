@@ -18,6 +18,7 @@ from tqdm import tqdm
 import os
 import glob
 import sys
+import random
 
 
 class Logging(object):
