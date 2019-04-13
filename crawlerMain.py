@@ -11,10 +11,10 @@ from io import open
 
 def usage():
     return '''
-        python crawler.py posts -u cal_foodie -n 100 -o ./output
-        python crawler.py posts_full -u cal_foodie -n 100 -o ./output
-        python crawler.py profile -u cal_foodie -o ./output
-        python crawler.py hashtag -t taiwan -o ./output
+        python crawlerMain.py posts -u cal_foodie -n 100 -o ./output
+        python crawlerMain.py posts_full -u cal_foodie -n 100 -o ./output
+        python crawlerMain.py profile -u cal_foodie -o ./output
+        python crawlerMain.py hashtag -t taiwan -o ./output
 
         The default number for fetching posts via hashtag is 100.
     '''
@@ -47,4 +47,4 @@ def output(data, filepath):
 
 
 if __name__ == '__main__':
-    get_posts_by_hashtag("love", None or 101, False), "./output"
+    get_posts_by_hashtag("love", None or 100, False), "./output"

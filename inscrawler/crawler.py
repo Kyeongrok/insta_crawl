@@ -311,17 +311,20 @@ class InsCrawler(Logging):
                     caption = ele_img.get_attribute('alt')
                     img_url = ele_img.get_attribute('src')
                     key_set.add(key)
-                    posts.append({
+                    post = {
                         'key': key,
                         'caption': caption,
                         'img_url': img_url
-                    })
+                    }
+                    print(post)
+                    posts.append(post)
             if pre_post_num == len(posts):
                 pbar.set_description('Wait for %s sec' % (wait_time))
                 sleep(wait_time)
                 pbar.set_description('fetching')
 
-                wait_time *= 2
+                rndNum =  random.randrange(1, 4)
+                wait_time *= rndNum
                 browser.scroll_up(300)
             else:
                 wait_time = 1
