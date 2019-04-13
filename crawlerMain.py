@@ -47,4 +47,5 @@ def output(data, filepath):
 
 
 if __name__ == '__main__':
-    get_posts_by_hashtag("love", None or 100, False), "./output"
+    result = get_posts_by_hashtag("love", None or 100, False)
+    output(result, "./output.json")
