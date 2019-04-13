@@ -167,7 +167,9 @@ class InsCrawler(Logging):
         # Fetching all img
         img_urls = set()
         while True:
-            ele_imgs = browser.find('._97aPb img', waittime=10)
+
+            rndNum2 =  random.randrange(5, 11)
+            ele_imgs = browser.find('._97aPb img', waittime=rndNum2)
             for ele_img in ele_imgs:
                 img_urls.add(ele_img.get_attribute('src'))
 
