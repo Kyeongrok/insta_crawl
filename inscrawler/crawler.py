@@ -119,6 +119,17 @@ class InsCrawler(Logging):
         self.browser.get(url)
         return self._get_posts(num)
 
+    def get_full_posts_by_tag(self, tag, num):
+        url = '%s/explore/tags/%s/' % (InsCrawler.URL, tag)
+        self.browser.get(url)
+        return self._get_tag_posts(num)
+
+    def _get_tag_posts(self, num):
+        full_posts = self._get_posts_full(num)
+        print('Done. Fetched %s posts.' % (min(len(full_posts), num)))
+
+        return full_posts[:num]
+
     def auto_like(self, tag='', maximum=1000):
         self.login()
         browser = self.browser
@@ -233,6 +244,14 @@ class InsCrawler(Logging):
         def check_next_post(cur_key):
             ele_a_datetime = browser.find_one('.eo2As .c-Yi7')
 
+            # if ele_a_datetime.get_attribute('href') is None:
+            #     print("NoneType datetime not found")
+            # else:
+            #     next_key = ele_a_datatime.get_attribute('href')
+            #
+            # if cur_key == next_key:
+            #     raise Exception()
+
             # It takes time to load the post for some users with slow network
             if ele_a_datetime is None:
                 raise RetryException()
@@ -254,6 +273,15 @@ class InsCrawler(Logging):
         # Fetching all posts
         for _ in range(num):
             dict_post = {}
+
+            # Fetching datetime and url as key
+            # ele_a_datetime = browser.find_one('.eo2As .c-Yi7')
+            # cur_key = ele_a_datetime.get_attribute('href')
+            # dict_post['key'] = cur_key
+            #
+            # ele_datetime = browser.find_one('._1o9PC', ele_a_datetime)
+            # datetime = ele_datetime.get_attribute('datetime')
+            # dict_post['datetime'] = datetime
 
             # Fetching post detail
             try:
@@ -308,6 +336,9 @@ class InsCrawler(Logging):
             for ele in ele_posts:
                 key = ele.get_attribute('href')
                 if key not in key_set:
+
+                    print(ele_a_datetime)
+
                     ele_img = browser.find_one('.KL4Bh img', ele)
                     caption = ele_img.get_attribute('alt')
                     img_url = ele_img.get_attribute('src')

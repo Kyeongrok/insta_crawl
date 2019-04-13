@@ -34,6 +34,9 @@ def get_posts_by_hashtag(tag, number, debug):
     ins_crawler = InsCrawler(has_screen=debug)
     return ins_crawler.get_latest_posts_by_tag(tag, number)
 
+def get_pull_posts_by_hashtag(tag, number):
+    ins_crawler = InsCrawler()
+    return ins_crawler.get_full_posts_by_tag(tag, number)
 
 
 
@@ -47,5 +50,11 @@ def output(data, filepath):
 
 
 if __name__ == '__main__':
-    result = get_posts_by_hashtag("love", None or 100, False)
-    output(result, "./output.json")
+    # result = get_posts_by_hashtag("love", None or 10, False)
+
+    result2 = get_pull_posts_by_hashtag("댕스타그램", 10)
+    print(result2)
+
+    # output(result, "./output.json")
+
+
