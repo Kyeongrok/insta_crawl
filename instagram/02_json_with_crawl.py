@@ -8,7 +8,7 @@ jsonObj = json.loads(file.read())
 print(len(jsonObj))
 
 datetimeParsedInfo = []
-for info in jsonObj[0:10]:
+for info in jsonObj[0:1000]:
     try:
         pageString = crawl(info['key'])
         datetime = parse(pageString)
