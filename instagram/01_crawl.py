@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import json
 
 def crawl(url):
 
@@ -9,9 +10,12 @@ def crawl(url):
 
 def parse(pageString):
     bsObj = BeautifulSoup(pageString, "html.parser")
-    print(bsObj)
     aTag = bsObj.find("div", {"class":"k_Q0X"})
-    print(aTag)
+
+    script = bsObj.find("script", {"type":"application/ld+json"})
+    jsonObj = json.loads(script.text)
+    print(jsonObj['uploadDate'])
+
     return {}
 
 url = "https://www.instagram.com/p/BwVoqW7H7b6/"
