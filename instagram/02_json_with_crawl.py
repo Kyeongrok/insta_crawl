@@ -19,6 +19,10 @@ for info in jsonObj[0:10]:
 
 print(datetimeParsedInfo)
 
+file = open("./0to1000.json", "w+")
+file.write(json.dumps(datetimeParsedInfo))
+
+
 
 
 
